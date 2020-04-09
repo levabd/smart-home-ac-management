@@ -1,1 +1,14 @@
-# Empty CSS file for your own CSS
+.main .panel {
+    border: 2px solid grey;
+    border-radius: 5px;
+    margin: 20px;
+}
+
+button {
+    cursor: pointer;
+}
+
+.panel p {
+    height: 200px;
+    overflow-y: scroll;
+}
