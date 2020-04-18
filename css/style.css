@@ -12,3 +12,8 @@ button {
     height: 200px;
     overflow-y: scroll;
 }
+
+
+.btn-group-vertical {
+    display: block !important;
+}
