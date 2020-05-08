@@ -19,6 +19,32 @@ $(document).ready(function () {
   };
 
   var $lrLog = $('#lr-log');
+  var $brLog = $('#br-log');
+  var $cbLog = $('#cb-log');
+
+  $.get('http://smart.levabd.pp.ua:2004/living-room/temp', function (data) {
+    $('#lr-t').text(data);
+  });
+
+  $.get('http://smart.levabd.pp.ua:2004/bedroom/temp', function (data) {
+    $('#br-t').text(data);
+  });
+
+  $.get('http://smart.levabd.pp.ua:2004/cabinet/temp', function (data) {
+    $('#cb-t').text(data);
+  });
+
+  $.get('http://smart.levabd.pp.ua:2004/living-room/humidity', function (data) {
+    $('#lr-h').text(data);
+  });
+
+  $.get('http://smart.levabd.pp.ua:2004/bedroom/humidity', function (data) {
+    $('#br-h').text(data);
+  });
+
+  $.get('http://smart.levabd.pp.ua:2004/cabinet/humidity', function (data) {
+    $('#cb-h').text(data);
+  });
 
   $('#lr-temp').click(function (event) {
     var temp = $('#lr-temp-val').val();
@@ -148,6 +174,176 @@ $(document).ready(function () {
         $lrLog.val($lrLog.val() + ' -========- \n');
         $lrLog.val($lrLog.val() + 'Failed to TURN ON' + '\n');
         $lrLog.scrollTop($lrLog[0].scrollHeight);
+      });
+  });
+
+  $('#br-temp').click(function (event) {
+    var temp = $('#br-temp-val').val();
+    $.get('http://smart.levabd.pp.ua:2002/setTemp-bedroom?temp=' + temp + '&key=27fbc501b51b47663e77c46816a', function (data) {
+      console.log(data);
+    })
+      .done(function () {
+        $brLog.val($brLog.val() + ' -========- \n');
+        $brLog.val($brLog.val() + 'Temperature was set' + '\n');
+        $brLog.scrollTop($brLog[0].scrollHeight);
+      })
+      .fail(function () {
+        $brLog.val($brLog.val() + ' -========- \n');
+        $brLog.val($brLog.val() + 'Temperature failed to set' + '\n');
+        $brLog.scrollTop($brLog[0].scrollHeight);
+      });
+  });
+
+  $('.br-status').click(function (event) {
+    $.get('http://smart.levabd.pp.ua:2002/status-bedroom?key=27fbc501b51b47663e77c46816a', function (data) {
+      console.log(data);
+      var pwr = data.Pow == 1 ? 'ON' : 'OFF';
+      $brLog.val($brLog.val() + ' -========- \n');
+      $brLog.val($brLog.val() + 'Power: ' + data.Pow + '\n');
+      $brLog.val($brLog.val() + 'Set temp: ' + data.SetTem + '\n');
+      $brLog.val($brLog.val() + 'Mode: ' + data.Mod + '\n');
+      $brLog.val($brLog.val() + 'Fan Speed: ' + data.WdSpd + '\n');
+      $brLog.scrollTop($brLog[0].scrollHeight);
+    }).fail(function () {
+      $brLog.val($brLog.val() + ' -========- \n');
+      $brLog.val($brLog.val() + 'Can not get status' + '\n');
+      $brLog.scrollTop($brLog[0].scrollHeight);
+    });
+  });
+
+  $('#br-fc').click(function (event) {
+    $.get('http://smart.levabd.pp.ua:2002/fast-cool-bedroom?key=27fbc501b51b47663e77c46816a', function (data) {
+      console.log(data);
+    })
+      .done(function () {
+        $.get('http://smart.levabd.pp.ua:2002/powerOn-bedroom?key=27fbc501b51b47663e77c46816a', function (data) {
+          console.log(data);
+        })
+          .done(function () {
+            $brLog.val($brLog.val() + ' -========- \n');
+            $brLog.val($brLog.val() + 'Turned FAST COOL' + '\n');
+            $brLog.scrollTop($brLog[0].scrollHeight);
+          })
+          .fail(function () {
+            $brLog.val($brLog.val() + ' -========- \n');
+            $brLog.val($brLog.val() + 'Failed to TURN FAST COOL' + '\n');
+            $brLog.scrollTop($brLog[0].scrollHeight);
+          });
+      })
+      .fail(function () {
+        $brLog.val($brLog.val() + ' -========- \n');
+        $brLog.val($brLog.val() + 'Failed to TURN FAST COOL' + '\n');
+        $brLog.scrollTop($brLog[0].scrollHeight);
+      });
+  });
+
+  $('#br-sc').click(function (event) {
+    $.get('http://smart.levabd.pp.ua:2002/cool-bedroom?key=27fbc501b51b47663e77c46816a', function (data) {
+      console.log(data);
+    })
+      .done(function () {
+        $.get('http://smart.levabd.pp.ua:2002/powerOn-bedroom?key=27fbc501b51b47663e77c46816a', function (data) {
+          console.log(data);
+        })
+          .done(function () {
+            $brLog.val($brLog.val() + ' -========- \n');
+            $brLog.val($brLog.val() + 'Turned COOL' + '\n');
+            $brLog.scrollTop($brLog[0].scrollHeight);
+          })
+          .fail(function () {
+            $brLog.val($brLog.val() + ' -========- \n');
+            $brLog.val($brLog.val() + 'Failed to TURN COOL' + '\n');
+            $brLog.scrollTop($brLog[0].scrollHeight);
+          });
+      })
+      .fail(function () {
+        $brLog.val($brLog.val() + ' -========- \n');
+        $brLog.val($brLog.val() + 'Failed to TURN COOL' + '\n');
+        $brLog.scrollTop($brLog[0].scrollHeight);
+      });
+  });
+
+  $('#br-fh').click(function (event) {
+    $.get('http://smart.levabd.pp.ua:2002/fast-heat-bedroom?key=27fbc501b51b47663e77c46816a', function (data) {
+      console.log(data);
+    })
+      .done(function () {
+        $.get('http://smart.levabd.pp.ua:2002/powerOn-bedroom?key=27fbc501b51b47663e77c46816a', function (data) {
+          console.log(data);
+        })
+          .done(function () {
+            $brLog.val($brLog.val() + ' -========- \n');
+            $brLog.val($brLog.val() + 'Turned FAST HEAT' + '\n');
+            $brLog.scrollTop($brLog[0].scrollHeight);
+          })
+          .fail(function () {
+            $brLog.val($brLog.val() + ' -========- \n');
+            $brLog.val($brLog.val() + 'Failed to TURN FAST HEAT' + '\n');
+            $brLog.scrollTop($brLog[0].scrollHeight);
+          });
+      })
+      .fail(function () {
+        $brLog.val($brLog.val() + ' -========- \n');
+        $brLog.val($brLog.val() + 'Failed to TURN FAST HEAT' + '\n');
+        $brLog.scrollTop($brLog[0].scrollHeight);
+      });
+  });
+
+  $('#br-sh').click(function (event) {
+    $.get('http://smart.levabd.pp.ua:2002/heat-bedroom?key=27fbc501b51b47663e77c46816a', function (data) {
+      console.log(data);
+    })
+      .done(function () {
+        $.get('http://smart.levabd.pp.ua:2002/powerOn-bedroom?key=27fbc501b51b47663e77c46816a', function (data) {
+          console.log(data);
+        })
+          .done(function () {
+            $brLog.val($brLog.val() + ' -========- \n');
+            $brLog.val($brLog.val() + 'Turned SLOW HEAT' + '\n');
+            $brLog.scrollTop($brLog[0].scrollHeight);
+          })
+          .fail(function () {
+            $brLog.val($brLog.val() + ' -========- \n');
+            $brLog.val($brLog.val() + 'Failed to TURN SLOW HEAT' + '\n');
+            $brLog.scrollTop($brLog[0].scrollHeight);
+          });
+      })
+      .fail(function () {
+        $brLog.val($brLog.val() + ' -========- \n');
+        $brLog.val($brLog.val() + 'Failed to TURN SLOW HEAT' + '\n');
+        $brLog.scrollTop($brLog[0].scrollHeight);
+      });
+  });
+
+  $('#br-off').click(function (event) {
+    $.get('http://smart.levabd.pp.ua:2002/powerOff-bedroom?key=27fbc501b51b47663e77c46816a', function (data) {
+      console.log(data);
+    })
+      .done(function () {
+        $brLog.val($brLog.val() + ' -========- \n');
+        $brLog.val($brLog.val() + 'TURN OFF Success' + '\n');
+        $brLog.scrollTop($brLog[0].scrollHeight);
+      })
+      .fail(function () {
+        $brLog.val($brLog.val() + ' -========- \n');
+        $brLog.val($brLog.val() + 'Failed to TURN OFF' + '\n');
+        $brLog.scrollTop($brLog[0].scrollHeight);
+      });
+  });
+
+  $('#br-on').click(function (event) {
+    $.get('http://smart.levabd.pp.ua:2002/powerOn-bedroom?key=27fbc501b51b47663e77c46816a', function (data) {
+      console.log(data);
+    })
+      .done(function () {
+        $brLog.val($brLog.val() + ' -========- \n');
+        $brLog.val($brLog.val() + 'TURN ON Success' + '\n');
+        $brLog.scrollTop($brLog[0].scrollHeight);
+      })
+      .fail(function () {
+        $brLog.val($brLog.val() + ' -========- \n');
+        $brLog.val($brLog.val() + 'Failed to TURN ON' + '\n');
+        $brLog.scrollTop($brLog[0].scrollHeight);
       });
   });
 });
