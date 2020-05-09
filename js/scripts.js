@@ -346,6 +346,174 @@ $(document).ready(function () {
         $brLog.scrollTop($brLog[0].scrollHeight);
       });
   });
-});
 
-//http://smart.levabd.pp.ua:2002/status-office?key=27fbc501b51b47663e77c46816a
+  $('#cb-temp').click(function (event) {
+    var temp = $('#br-temp-val').val();
+    $.get('http://smart.levabd.pp.ua:2002/setTemp-office?temp=' + temp + '&key=27fbc501b51b47663e77c46816a', function (data) {
+      console.log(data);
+    })
+      .done(function () {
+        $cbLog.val($cbLog.val() + ' -========- \n');
+        $cbLog.val($cbLog.val() + 'Temperature was set' + '\n');
+        $cbLog.scrollTop($cbLog[0].scrollHeight);
+      })
+      .fail(function () {
+        $cbLog.val($cbLog.val() + ' -========- \n');
+        $cbLog.val($cbLog.val() + 'Temperature failed to set' + '\n');
+        $cbLog.scrollTop($cbLog[0].scrollHeight);
+      });
+  });
+
+  $('.cb-status').click(function (event) {
+    $.get('http://smart.levabd.pp.ua:2002/status-office?key=27fbc501b51b47663e77c46816a', function (data) {
+      console.log(data);
+      var pwr = data.Pow == 1 ? 'ON' : 'OFF';
+      $cbLog.val($cbLog.val() + ' -========- \n');
+      $cbLog.val($cbLog.val() + 'Power: ' + data.Pow + '\n');
+      $cbLog.val($cbLog.val() + 'Set temp: ' + data.SetTem + '\n');
+      $cbLog.val($cbLog.val() + 'Mode: ' + data.Mod + '\n');
+      $cbLog.val($cbLog.val() + 'Fan Speed: ' + data.WdSpd + '\n');
+      $cbLog.scrollTop($cbLog[0].scrollHeight);
+    }).fail(function () {
+      $cbLog.val($cbLog.val() + ' -========- \n');
+      $cbLog.val($cbLog.val() + 'Can not get status' + '\n');
+      $cbLog.scrollTop($cbLog[0].scrollHeight);
+    });
+  });
+
+  $('#cb-fc').click(function (event) {
+    $.get('http://smart.levabd.pp.ua:2002/fast-cool-office?autoFan=true&key=27fbc501b51b47663e77c46816a', function (data) {
+      console.log(data);
+    })
+      .done(function () {
+        $.get('http://smart.levabd.pp.ua:2002/powerOn-office?key=27fbc501b51b47663e77c46816a', function (data) {
+          console.log(data);
+        })
+          .done(function () {
+            $cbLog.val($cbLog.val() + ' -========- \n');
+            $cbLog.val($cbLog.val() + 'Turned FAST COOL' + '\n');
+            $cbLog.scrollTop($cbLog[0].scrollHeight);
+          })
+          .fail(function () {
+            $cbLog.val($cbLog.val() + ' -========- \n');
+            $cbLog.val($cbLog.val() + 'Failed to TURN FAST COOL' + '\n');
+            $cbLog.scrollTop($cbLog[0].scrollHeight);
+          });
+      })
+      .fail(function () {
+        $cbLog.val($cbLog.val() + ' -========- \n');
+        $cbLog.val($cbLog.val() + 'Failed to TURN FAST COOL' + '\n');
+        $cbLog.scrollTop($cbLog[0].scrollHeight);
+      });
+  });
+
+  $('#cb-sc').click(function (event) {
+    $.get('http://smart.levabd.pp.ua:2002/cool-office?autoFan=true&key=27fbc501b51b47663e77c46816a', function (data) {
+      console.log(data);
+    })
+      .done(function () {
+        $.get('http://smart.levabd.pp.ua:2002/powerOn-office?key=27fbc501b51b47663e77c46816a', function (data) {
+          console.log(data);
+        })
+          .done(function () {
+            $cbLog.val($cbLog.val() + ' -========- \n');
+            $cbLog.val($cbLog.val() + 'Turned COOL' + '\n');
+            $cbLog.scrollTop($cbLog[0].scrollHeight);
+          })
+          .fail(function () {
+            $cbLog.val($cbLog.val() + ' -========- \n');
+            $cbLog.val($cbLog.val() + 'Failed to TURN COOL' + '\n');
+            $cbLog.scrollTop($cbLog[0].scrollHeight);
+          });
+      })
+      .fail(function () {
+        $cbLog.val($cbLog.val() + ' -========- \n');
+        $cbLog.val($cbLog.val() + 'Failed to TURN COOL' + '\n');
+        $cbLog.scrollTop($cbLog[0].scrollHeight);
+      });
+  });
+
+  $('#cb-fh').click(function (event) {
+    $.get('http://smart.levabd.pp.ua:2002/fast-heat-office?autoFan=true&key=27fbc501b51b47663e77c46816a', function (data) {
+      console.log(data);
+    })
+      .done(function () {
+        $.get('http://smart.levabd.pp.ua:2002/powerOn-office?key=27fbc501b51b47663e77c46816a', function (data) {
+          console.log(data);
+        })
+          .done(function () {
+            $cbLog.val($cbLog.val() + ' -========- \n');
+            $cbLog.val($cbLog.val() + 'Turned FAST HEAT' + '\n');
+            $cbLog.scrollTop($cbLog[0].scrollHeight);
+          })
+          .fail(function () {
+            $cbLog.val($cbLog.val() + ' -========- \n');
+            $cbLog.val($cbLog.val() + 'Failed to TURN FAST HEAT' + '\n');
+            $cbLog.scrollTop($cbLog[0].scrollHeight);
+          });
+      })
+      .fail(function () {
+        $cbLog.val($cbLog.val() + ' -========- \n');
+        $cbLog.val($cbLog.val() + 'Failed to TURN FAST HEAT' + '\n');
+        $cbLog.scrollTop($cbLog[0].scrollHeight);
+      });
+  });
+
+  $('#cb-sh').click(function (event) {
+    $.get('http://smart.levabd.pp.ua:2002/heat-office?autoFan=true&key=27fbc501b51b47663e77c46816a', function (data) {
+      console.log(data);
+    })
+      .done(function () {
+        $.get('http://smart.levabd.pp.ua:2002/powerOn-office?key=27fbc501b51b47663e77c46816a', function (data) {
+          console.log(data);
+        })
+          .done(function () {
+            $cbLog.val($cbLog.val() + ' -========- \n');
+            $cbLog.val($cbLog.val() + 'Turned SLOW HEAT' + '\n');
+            $cbLog.scrollTop($cbLog[0].scrollHeight);
+          })
+          .fail(function () {
+            $cbLog.val($cbLog.val() + ' -========- \n');
+            $cbLog.val($cbLog.val() + 'Failed to TURN SLOW HEAT' + '\n');
+            $cbLog.scrollTop($cbLog[0].scrollHeight);
+          });
+      })
+      .fail(function () {
+        $cbLog.val($cbLog.val() + ' -========- \n');
+        $cbLog.val($cbLog.val() + 'Failed to TURN SLOW HEAT' + '\n');
+        $cbLog.scrollTop($cbLog[0].scrollHeight);
+      });
+  });
+
+  $('#cb-off').click(function (event) {
+    $.get('http://smart.levabd.pp.ua:2002/powerOff-office?autoFan=true&key=27fbc501b51b47663e77c46816a', function (data) {
+      console.log(data);
+    })
+      .done(function () {
+        $cbLog.val($cbLog.val() + ' -========- \n');
+        $cbLog.val($cbLog.val() + 'TURN OFF Success' + '\n');
+        $cbLog.scrollTop($cbLog[0].scrollHeight);
+      })
+      .fail(function () {
+        $cbLog.val($cbLog.val() + ' -========- \n');
+        $cbLog.val($cbLog.val() + 'Failed to TURN OFF' + '\n');
+        $cbLog.scrollTop($cbLog[0].scrollHeight);
+      });
+  });
+
+  $('#cb-on').click(function (event) {
+    $.get('http://smart.levabd.pp.ua:2002/powerOn-office?autoFan=true&key=27fbc501b51b47663e77c46816a', function (data) {
+      console.log(data);
+    })
+      .done(function () {
+        $cbLog.val($cbLog.val() + ' -========- \n');
+        $cbLog.val($cbLog.val() + 'TURN ON Success' + '\n');
+        $cbLog.scrollTop($cbLog[0].scrollHeight);
+      })
+      .fail(function () {
+        $cbLog.val($cbLog.val() + ' -========- \n');
+        $cbLog.val($cbLog.val() + 'Failed to TURN ON' + '\n');
+        $cbLog.scrollTop($cbLog[0].scrollHeight);
+      });
+  });
+});
