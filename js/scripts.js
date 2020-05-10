@@ -382,7 +382,7 @@ $(document).ready(function () {
   });
 
   $('#cb-fc').click(function (event) {
-    $.get('http://smart.levabd.pp.ua:2002/fast-cool-office?autoFan=true&key=27fbc501b51b47663e77c46816a', function (data) {
+    $.get('http://smart.levabd.pp.ua:2002/fast-cool-office?autoFan=false&key=27fbc501b51b47663e77c46816a', function (data) {
       console.log(data);
     })
       .done(function () {
@@ -408,7 +408,7 @@ $(document).ready(function () {
   });
 
   $('#cb-sc').click(function (event) {
-    $.get('http://smart.levabd.pp.ua:2002/cool-office?autoFan=true&key=27fbc501b51b47663e77c46816a', function (data) {
+    $.get('http://smart.levabd.pp.ua:2002/cool-office?autoFan=false&key=27fbc501b51b47663e77c46816a', function (data) {
       console.log(data);
     })
       .done(function () {
@@ -434,7 +434,7 @@ $(document).ready(function () {
   });
 
   $('#cb-fh').click(function (event) {
-    $.get('http://smart.levabd.pp.ua:2002/fast-heat-office?autoFan=true&key=27fbc501b51b47663e77c46816a', function (data) {
+    $.get('http://smart.levabd.pp.ua:2002/fast-heat-office?autoFan=false&key=27fbc501b51b47663e77c46816a', function (data) {
       console.log(data);
     })
       .done(function () {
@@ -460,7 +460,7 @@ $(document).ready(function () {
   });
 
   $('#cb-sh').click(function (event) {
-    $.get('http://smart.levabd.pp.ua:2002/heat-office?autoFan=true&key=27fbc501b51b47663e77c46816a', function (data) {
+    $.get('http://smart.levabd.pp.ua:2002/heat-office?autoFan=false&key=27fbc501b51b47663e77c46816a', function (data) {
       console.log(data);
     })
       .done(function () {
@@ -486,7 +486,7 @@ $(document).ready(function () {
   });
 
   $('#cb-off').click(function (event) {
-    $.get('http://smart.levabd.pp.ua:2002/powerOff-office?autoFan=true&key=27fbc501b51b47663e77c46816a', function (data) {
+    $.get('http://smart.levabd.pp.ua:2002/powerOff-office?autoFan=false&key=27fbc501b51b47663e77c46816a', function (data) {
       console.log(data);
     })
       .done(function () {
@@ -502,7 +502,7 @@ $(document).ready(function () {
   });
 
   $('#cb-on').click(function (event) {
-    $.get('http://smart.levabd.pp.ua:2002/powerOn-office?autoFan=true&key=27fbc501b51b47663e77c46816a', function (data) {
+    $.get('http://smart.levabd.pp.ua:2002/powerOn-office?autoFan=false&key=27fbc501b51b47663e77c46816a', function (data) {
       console.log(data);
     })
       .done(function () {
