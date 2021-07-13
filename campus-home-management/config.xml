@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget 
+    id="io.campus.home" 
+    version="1.0.0" 
+    xmlns="http://www.w3.org/ns/widgets" 
+    xmlns:android="http://schemas.android.com/apk/res/android" 
+    xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Campus Home management</name>
+    <description>
+        Management of Oleg's Campus home.
+    </description>
+    <author email="levabd@gmail.com" href="http://smart.levabd.pp.ua:2005/">
+        Oleg Levitsky
+    </author>
+    <content src="index.html" />
+    <icon src="icon.png" />
+    <allow-navigation href="*" />
+    <allow-intent href="*" />
+    <access origin="*" />
+    <allow-navigation href="*://*.levabd.pp.ua:2004/*" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <allow-intent href="tel:*" />
+    <allow-intent href="sms:*" />
+    <allow-intent href="mailto:*" />
+    <allow-intent href="geo:*" />
+    <platform name="android">
+        <allow-intent href="market:*" />
+        <resource-file src="resources/android/xml/network_security_config.xml" target="app/src/main/res/xml/network_security_config.xml" />
+        <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application" xmlns:android="http://schemas.android.com/apk/res/android">
+            <application android:usesCleartextTraffic="true" />
+            <application android:networkSecurityConfig="@xml/network_security_config" />
+        </edit-config>
+    </platform>
+    <platform name="ios">
+        <allow-intent href="itms:*" />
+        <allow-intent href="itms-apps:*" />
+    </platform>
+</widget>
