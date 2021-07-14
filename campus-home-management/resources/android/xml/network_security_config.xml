@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <base-config cleartextTrafficPermitted="true">
+        <trust-anchors>
+           <certificates src="system" />
+       </trust-anchors>
+    </base-config>
+    <domain-config cleartextTrafficPermitted="true">
+        <domain>smart.levabd.pp.ua</domain>
+        <domain includeSubdomains="true">localhost</domain>
+        <domain includeSubdomains="true">smart.levabd.pp.ua:2002</domain>
+        <domain includeSubdomains="true">smart.levabd.pp.ua:2003</domain>
+        <domain includeSubdomains="true">smart.levabd.pp.ua:2004</domain>
+    </domain-config>
+</network-security-config>
